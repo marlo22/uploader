@@ -1,0 +1,21 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-info
+  a.navbar-brand(href="/") Uploader
+  div.collapse.navbar-collapse#navbar
+    ul.navbar-nav
+      if path === '/'
+        li.nav-item.active
+          a.nav-link(href="/") Dodaj plik
+      else
+        li.nav-item
+          a.nav-link(href="/") Dodaj plik
+      li.nav-item
+        a.nav-link(href="/browser") Katalog zasobów
+      li.nav-item
+        a.nav-link(href="/browser") Usuń plik
+      li.nav-item
+        a.nav-link(href="/policy") Regulamin
+  form.form-inline.my-2.my-lg-0
+    input.form-control.mr-sm-2(type="search" placeholder="Znajdź plik...")
+    button.btn.btn-light.my-2.my-sm-0 Szukaj
+    button.navbar-toggler.ml-2(type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Pokaż/ukryj menu")
+      span Menu
