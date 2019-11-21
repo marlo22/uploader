@@ -1,3 +1,6 @@
+import validFileType from './validFileType';
+import validFileSize from './validFileSize';
+
 export default function handleUploaderInputChange(e) {
   const confirmCheckbox = document.getElementById('ownConfirm');
   const submitButton = document.getElementById('submitFileBtn');
@@ -12,4 +15,7 @@ export default function handleUploaderInputChange(e) {
   } else {
     submitButton.disabled = true;
   }
+
+  validFileType(file.type);
+  validFileSize(file.size);
 };

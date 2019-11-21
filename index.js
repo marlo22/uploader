@@ -9,6 +9,11 @@ const indexRouter = require('./controllers/index');
 
 const { PORT } = process.env;
 
+app.locals.env = {
+  FILE_MAX_SIZE: process.env.FILE_MAX_SIZE,
+  FILE_ALLOWED_FORMATS: process.env.FILE_ALLOWED_FORMATS
+};
+
 app.use(helmet());
 app.set('view engine', 'pug');
 app.use(indexRouter);

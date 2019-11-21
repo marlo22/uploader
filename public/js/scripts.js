@@ -13,6 +13,74 @@ var _uploaderDOMFunctions = (function () {
     }
   }
 
+  function createHtmlElem() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        node = _ref.node,
+        attrs = _ref.attrs;
+
+    var elem = document.createElement(node);
+    Object.keys(attrs).forEach(function (attr) {
+      elem.setAttribute(attr, attrs[attr]);
+    });
+    return elem;
+  }
+
+  function createAlertDiv(message, alertType) {
+    var alertDiv = createHtmlElem({
+      node: 'div',
+      attrs: {
+        "class": "alert alert-".concat(alertType, " mt-3"),
+        role: 'alert'
+      }
+    });
+    alertDiv.textContent = message;
+    var closeBtn = createHtmlElem({
+      node: 'button',
+      attrs: {
+        type: 'button',
+        "class": 'close',
+        'data-dismiss': 'alert',
+        'aria-label': close
+      }
+    });
+    var closeChar = createHtmlElem({
+      node: 'span',
+      attrs: {
+        'aria-hidden': true
+      }
+    });
+    closeChar.innerHTML = '&times;';
+    closeBtn.appendChild(closeChar);
+    alertDiv.appendChild(closeBtn);
+    return alertDiv;
+  }
+
+  function printMessage(message) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'danger';
+    var messageContainer = document.getElementById('messageContainer');
+    var alertDiv = createAlertDiv(message, type);
+    messageContainer.appendChild(alertDiv);
+  }
+
+  function validFileType(mimeType) {
+    var allowedTypes = window.__FILE_ALLOWED_FORMATS__.split(',');
+
+    if (!allowedTypes.includes(mimeType)) {
+      printMessage("Niedozwolony typ ".concat(mimeType, "."));
+    }
+  }
+
+  function validFileSize(fileSize) {
+    var _window = window,
+        __FILE_MAX_SIZE__ = _window.__FILE_MAX_SIZE__;
+    var fileSizeInKb = fileSize / 1000;
+
+    if (__FILE_MAX_SIZE__ < fileSizeInKb) {
+      var maxFileSizeInMb = __FILE_MAX_SIZE__ / 1000;
+      printMessage("Wczytany plik jest zbyt du\u017Cy. Maksymalny rozmiar to ".concat(maxFileSizeInMb, " MB"));
+    }
+  }
+
   function handleUploaderInputChange(e) {
     var confirmCheckbox = document.getElementById('ownConfirm');
     var submitButton = document.getElementById('submitFileBtn');
@@ -25,6 +93,9 @@ var _uploaderDOMFunctions = (function () {
     } else {
       submitButton.disabled = true;
     }
+
+    validFileType(file.type);
+    validFileSize(file.size);
   }
 
   var listeners = [{
