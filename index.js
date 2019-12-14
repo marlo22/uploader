@@ -1,11 +1,14 @@
 require('dotenv').config();
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
 const indexRouter = require('./controllers/index');
+const uploadRouter = require('./controllers/upload');
 
 const { PORT } = process.env;
 
@@ -14,9 +17,14 @@ app.locals.env = {
   FILE_ALLOWED_FORMATS: process.env.FILE_ALLOWED_FORMATS
 };
 
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(helmet());
+app.use(fileUpload());
 app.set('view engine', 'pug');
+
 app.use(indexRouter);
+app.use(uploadRouter);
 
 app.use('/bootstrap', express.static(`${__dirname}/node_modules/bootstrap/dist`));
 app.use('/js', express.static(`${__dirname}/public/js`));

@@ -9,18 +9,19 @@ html
           h1 #{subtitle}
           hr
           p= "Wskaż plik, który chcesz zapisać na naszym serwerze."
-          div.input-group
-            div.custom-file
-              input.custom-file-input#uploaderInput(type="file")
-              label.custom-file-label#uploaderLabel(for="uploaderInput")
-          small.text-muted Maksymalny rozmiar pliku to #{maxFileSize / 1000} MB. Dopuszczalne formaty to: #{allowedFileFormats}.
-          div.form-check.mt-2
-            input.form-check-input#private(type="checkbox")
-            label.form-check-label(for="private") Plik prywatny
-          div.form-check
-            input.form-check-input#ownConfirm(type="checkbox")
-            label.form-check-label(for="ownConfirm") Potwierdzam, że posiadam prawa autorskie do tego pliku
-          button.btn.btn-info.mt-2#submitFileBtn(type="submit" disabled) Wyślij plik
+          form(action="/upload" method="POST" enctype="multipart/form-data")
+            div.input-group
+              div.custom-file
+                input.custom-file-input#uploaderInput(type="file" name="file")
+                label.custom-file-label#uploaderLabel(for="uploaderInput")
+            small.text-muted Maksymalny rozmiar pliku to #{maxFileSize / 1000} MB. Dopuszczalne formaty to: #{allowedFileFormats}.
+            div.form-check.mt-2
+              input.form-check-input#private(type="checkbox" name="isPrivate")
+              label.form-check-label(for="private") Plik prywatny
+            div.form-check
+              input.form-check-input#ownConfirm(type="checkbox")
+              label.form-check-label(for="ownConfirm") Potwierdzam, że posiadam prawa autorskie do tego pliku
+            button.btn.btn-info.mt-2#submitFileBtn(type="submit" disabled) Wyślij plik
           div#messageContainer
           include includes/scripts
         div.col-4
