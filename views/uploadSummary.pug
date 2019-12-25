@@ -6,14 +6,12 @@ html
     div.container
       div.row.mt-3
         div.col-8
-          h1 udało się!
-          hr
-          span Plik <strong>#{fileName}</strong> został pomyślnie zapisany na naszym serwerze jako zasób <strong>#{isPrivate === 0 ? 'publiczny' : 'prywatny'}</strong>.
-          if isPrivate === 0
-            span= " Oznacza to, że będzie on widoczny w katalogu zasobów i każda osoba będzie mogła uzyskać do niego dostęp."
-          else
-            span= " Oznacza to, że nie będzie on widoczny w katalogu zasobów i dostęp do niego będzie mogła uzyskać tylko i wyłącznie osoba, która posiada unikalny link."
-          hr
+          span.h1 udało się!
+          p.alert.alert-success.mt-2 Plik <strong>#{fileName}</strong> został pomyślnie zapisany na naszym serwerze jako zasób <strong>#{isPrivate === 0 ? 'publiczny' : 'prywatny'}</strong>.
+            if isPrivate === 0
+              span= " Oznacza to, że będzie on widoczny w katalogu zasobów i każda osoba będzie mogła uzyskać do niego dostęp."
+            else
+              span= " Oznacza to, że nie będzie on widoczny w katalogu zasobów i dostęp do niego będzie mogła uzyskać tylko i wyłącznie osoba, która posiada unikalny link."
           div.form-group.mt-3
             label(for="fileShareUrl")
               span Link do pobrania pliku:
