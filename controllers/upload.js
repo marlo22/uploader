@@ -1,5 +1,7 @@
 const express = require('express');
 const saveUploadedFile = require('../services/saveUploadedFile');
+const getFileEntry = require('../services/getFileEntry');
+const getHostUrl = require('../helpers/getHostUrl');
 
 const router = express.Router();
 
@@ -12,6 +14,23 @@ router.post('/upload', (req, res) => {
     file: req.files.file,
     isPrivate: !!req.body.isPrivate,
     res
+  });
+});
+
+router.get('/upload/:fileId', async (req, res) => {
+  const { fileId } = req.params;
+  const fileDownloadUrl = `${getHostUrl(req)}/download/${fileId}`;
+  const {
+    delete_code: deleteCode,
+    file_name: fileName,
+    is_private: isPrivate
+  } = await getFileEntry({ fileId });
+
+  res.render('uploadSummary', {
+    deleteCode,
+    fileName,
+    isPrivate,
+    fileDownloadUrl
   });
 });
 

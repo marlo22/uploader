@@ -1,6 +1,7 @@
 const uuid = require('uuid');
 const checkUploadDirectory = require('../helpers/checkUploadDirectory');
 const getExtensionFromFileName = require('../helpers/getExtensionFromFileName');
+const generateDeleteCode = require('../helpers/generateDeleteCode');
 const addFileEntryToDb = require('./addFileEntryToDb');
 
 module.exports = function saveUploadedFile({ file, isPrivate, res }) {
@@ -8,6 +9,7 @@ module.exports = function saveUploadedFile({ file, isPrivate, res }) {
 
   const { name: fileName } = file;
   const fileId = uuid();
+  const deleteCode = generateDeleteCode();
   const ext = getExtensionFromFileName(fileName);
 
   file.mv(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${ext}`, async err => {
@@ -16,9 +18,10 @@ module.exports = function saveUploadedFile({ file, isPrivate, res }) {
     await addFileEntryToDb({
       fileId,
       fileName,
-      isPrivate
+      isPrivate,
+      deleteCode
     });
 
-    res.sendStatus(201);
+    res.redirect(`upload/${fileId}`);
   });
 };
