@@ -11,15 +11,16 @@ module.exports = function saveUploadedFile({ file, isPrivate, res }) {
   const id = uuid();
   const fileId = uuid();
   const deleteCode = generateDeleteCode();
-  const ext = getExtensionFromFileName(fileName);
+  const fileExt = getExtensionFromFileName(fileName);
 
-  file.mv(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${ext}`, async err => {
+  file.mv(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${fileExt}`, async err => {
     if (err) return res.status(500).send(err);
 
     await addFileEntryToDb({
       id,
       fileId,
       fileName,
+      fileExt,
       isPrivate,
       deleteCode
     });
