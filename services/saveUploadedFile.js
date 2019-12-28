@@ -8,6 +8,7 @@ module.exports = function saveUploadedFile({ file, isPrivate, res }) {
   checkUploadDirectory();
 
   const { name: fileName } = file;
+  const id = uuid();
   const fileId = uuid();
   const deleteCode = generateDeleteCode();
   const ext = getExtensionFromFileName(fileName);
@@ -16,6 +17,7 @@ module.exports = function saveUploadedFile({ file, isPrivate, res }) {
     if (err) return res.status(500).send(err);
 
     await addFileEntryToDb({
+      id,
       fileId,
       fileName,
       isPrivate,
