@@ -18,22 +18,30 @@ router.post('/upload', (req, res) => {
 });
 
 router.get('/upload/:fileId', async (req, res) => {
-  const { fileId } = req.params;
-  const {
-    id,
-    delete_code: deleteCode,
-    file_name: fileName,
-    is_private: isPrivate
-  } = await getFileEntry({ fileId });
-  const fileDownloadUrl = `${getHostUrl(req)}/download/${id}`;
-
-
-  res.render('uploadSummary', {
-    deleteCode,
-    fileName,
-    isPrivate,
-    fileDownloadUrl
-  });
+  try {
+    const { fileId } = req.params;
+    const fileEntry = await getFileEntry({ fileId });
+  
+    if (!fileEntry) return res.sendStatus(404);
+  
+    const {
+      id,
+      delete_code: deleteCode,
+      file_name: fileName,
+      is_private: isPrivate
+    } = fileEntry;
+    const fileDownloadUrl = `${getHostUrl(req)}/download/${id}`;
+  
+  
+    res.render('uploadSummary', {
+      deleteCode,
+      fileName,
+      isPrivate,
+      fileDownloadUrl
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 module.exports = router;

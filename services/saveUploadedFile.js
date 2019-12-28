@@ -16,15 +16,19 @@ module.exports = function saveUploadedFile({ file, isPrivate, res }) {
   file.mv(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${fileExt}`, async err => {
     if (err) return res.status(500).send(err);
 
-    await addFileEntryToDb({
-      id,
-      fileId,
-      fileName,
-      fileExt,
-      isPrivate,
-      deleteCode
-    });
-
-    res.redirect(`upload/${fileId}`);
+    try {
+      await addFileEntryToDb({
+        id,
+        fileId,
+        fileName,
+        fileExt,
+        isPrivate,
+        deleteCode
+      });
+  
+      res.redirect(`upload/${fileId}`);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   });
 };
