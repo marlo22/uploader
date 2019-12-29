@@ -1,0 +1,19 @@
+html
+  include includes/head
+    title Uploader - pobierz plik
+  body
+    include includes/header
+    div.container
+      div.row.mt-3
+        div.col-8
+          span.h1 pobierz plik
+          ul.list-group.my-3
+            li.list-group-item Nazwa: #{fileName}
+            li.list-group-item Rozmiar: #{fileSize} MB
+            li.list-group-item Data dodania: #{uploadDate}
+            li.list-group-item Liczba pobrań: #{downloadCounter}
+          a.btn.btn-info(href=`/download/${id}/get`)= "Pobierz"
+          include includes/scripts
+        div.col-4
+          include includes/sidebar
+      include includes/footer
