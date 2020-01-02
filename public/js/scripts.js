@@ -98,6 +98,18 @@ var _uploaderDOMFunctions = (function () {
     validFileSize(file.size);
   }
 
+  function handleDeleteCodeInputsChange() {
+    var fileUrlInputVal = document.getElementById('fileUrl').value;
+    var deleteCodeInputVal = document.getElementById('deleteCode').value;
+    var deleteBtn = document.getElementById('deleteFileBtn');
+
+    if (fileUrlInputVal && deleteCodeInputVal) {
+      deleteBtn.disabled = false;
+    } else {
+      deleteBtn.disabled = true;
+    }
+  }
+
   var listeners = [{
     element: document.getElementById('ownConfirm'),
     event: 'change',
@@ -106,6 +118,14 @@ var _uploaderDOMFunctions = (function () {
     element: document.getElementById('uploaderInput'),
     event: 'change',
     handler: handleUploaderInputChange
+  }, {
+    element: document.getElementById('fileUrl'),
+    event: 'keyup',
+    handler: handleDeleteCodeInputsChange
+  }, {
+    element: document.getElementById('deleteCode'),
+    event: 'keyup',
+    handler: handleDeleteCodeInputsChange
   }];
   listeners.forEach(function (_ref) {
     var element = _ref.element,

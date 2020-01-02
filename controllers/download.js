@@ -21,7 +21,7 @@ router.get('/download/:id', async (req, res) => {
       upload_date: uploadDate,
       download_counter: downloadCounter
     } = fileEntry;
-    const fileSize = await getFileSize(`files/${fileId}.${fileExt}`);
+    const fileSize = await getFileSize(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${fileExt}`);
   
     res.render('download', {
       id,
@@ -50,7 +50,7 @@ router.get('/download/:id/get', async (req, res) => {
     } = fileEntry;
 
     await increaseDownloadCounter(id);
-    res.download(`files/${fileId}.${fileExt}`, fileName);
+    res.download(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${fileExt}`, fileName);
   } catch (err) {
     res.status(500).send(err);
   }
