@@ -1,9 +1,10 @@
 const express = require('express');
+const getTopDownloads = require('../middlewares/getTopDownloads'); 
 const deleteFile = require('../services/deleteFile');
 
 const router = express.Router();
 
-router.get('/remove', (req, res) => {
+router.get('/remove', getTopDownloads, (req, res) => {
   res.render('remove');
 });
 

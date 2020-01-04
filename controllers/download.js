@@ -1,4 +1,5 @@
 const express = require('express');
+const getTopDownloads = require('../middlewares/getTopDownloads'); 
 const getFileEntry = require('../services/getFileEntry');
 const increaseDownloadCounter = require('../services/increaseDownloadCounter');
 const { formatDate } = require('../helpers/formatDate');
@@ -6,7 +7,7 @@ const getFileSize = require('../helpers/getFileSize');
 
 const router = express.Router();
 
-router.get('/download/:id', async (req, res) => {
+router.get('/download/:id', getTopDownloads, async (req, res) => {
   const { id } = req.params;
 
   try {

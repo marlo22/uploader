@@ -1,3 +1,15 @@
+mixin topDownloadsList(data = [])
+  div.card-header
+    span Najchętniej pobierane
+  if !data.length
+    span.py-3.px-3 Brak ostatnio pobranych plików.
+  else
+    ul.list-group.list-group-flush
+      each file in data
+        li.list-group-item.d-flex.justify-content-between.align-items-center
+          a.text-body(href=`/download/${file.id}`) #{file.file_name}
+          span.badge.badge-info.badge-pill #{file.download_counter}
+
 div.row
   div.col
     div.card
@@ -10,11 +22,4 @@ div.row
         li.list-group-item zima.jpg
         li.list-group-item GIMP_2_12_2.exe
     div.card.mt-3
-      div.card-header
-        span Najchętniej pobierane
-      ul.list-group.list-group-flush
-        li.list-group-item icy_tower_1_2.zip
-        li.list-group-item mapa.png
-        li.list-group-item kebab.zip
-        li.list-group-item a3453_2354a.jpg
-        li.list-group-item hash.exe
+      +topDownloadsList(topDownloads)
