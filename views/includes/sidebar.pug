@@ -1,25 +1,29 @@
+mixin lastAddedFilesList(data = [])
+  div.card
+    div.card-header
+      span Ostatnio dodane
+    if !data.length
+      span.py-3.px-3 Brak ostatnio dodanych plików.
+    else
+      ul.list-group.list-group-flush
+        each file in data
+          li.list-group-item.d-flex.justify-content-between.align-items-center
+            a.text-body(href=`/download/${file.id}`) #{file.file_name}
+
 mixin topDownloadsList(data = [])
-  div.card-header
-    span Najchętniej pobierane
-  if !data.length
-    span.py-3.px-3 Brak ostatnio pobranych plików.
-  else
-    ul.list-group.list-group-flush
-      each file in data
-        li.list-group-item.d-flex.justify-content-between.align-items-center
-          a.text-body(href=`/download/${file.id}`) #{file.file_name}
-          span.badge.badge-info.badge-pill #{file.download_counter}
+  div.card.mt-3
+    div.card-header
+      span Najchętniej pobierane
+    if !data.length
+      span.py-3.px-3 Brak ostatnio pobranych plików.
+    else
+      ul.list-group.list-group-flush
+        each file in data
+          li.list-group-item.d-flex.justify-content-between.align-items-center
+            a.text-body(href=`/download/${file.id}`) #{file.file_name}
+            span.badge.badge-info.badge-pill #{file.download_counter}
 
 div.row
   div.col
-    div.card
-      div.card-header
-        span Ostatnio dodane
-      ul.list-group.list-group-flush
-        li.list-group-item zalacznik_1.zip
-        li.list-group-item obraz_123.png
-        li.list-group-item fotki_wakacje.zip
-        li.list-group-item zima.jpg
-        li.list-group-item GIMP_2_12_2.exe
-    div.card.mt-3
-      +topDownloadsList(topDownloads)
+    +lastAddedFilesList(lastAddedFiles)
+    +topDownloadsList(topDownloads)

@@ -1,5 +1,7 @@
 const express = require('express');
 const saveUploadedFile = require('../services/saveUploadedFile');
+const getLastAddedFiles = require('../middlewares/getLastAddedFiles');
+const getTopDownloads = require('../middlewares/getTopDownloads');
 const getFileEntry = require('../services/getFileEntry');
 const getHostUrl = require('../helpers/getHostUrl');
 
@@ -17,7 +19,7 @@ router.post('/upload', (req, res) => {
   });
 });
 
-router.get('/upload/:fileId', async (req, res) => {
+router.get('/upload/:fileId', [getLastAddedFiles, getTopDownloads], async (req, res) => {
   try {
     const { fileId } = req.params;
     const fileEntry = await getFileEntry({ fileId });
