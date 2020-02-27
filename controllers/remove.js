@@ -13,8 +13,8 @@ router.post('/remove', [getLastAddedFiles, getTopDownloads], async (req, res) =>
   const { id, deleteCode } = req.body;
 
   try {
-    const deleteSuccess = await deleteFile({ id, deleteCode });
-    const status = deleteSuccess ? 'success' : 'failed';
+    const deleteStatus = await deleteFile({ id, deleteCode });
+    const status = deleteStatus ? 'success' : 'failed';
 
     res.render('remove', { status });
   } catch (err) {
