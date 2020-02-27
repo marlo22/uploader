@@ -1,0 +1,16 @@
+CREATE TABLE files (
+  id UUID NOT NULL PRIMARY KEY,
+  file_id UUID NOT NULL,
+  file_name VARCHAR(100) NOT NULL,
+  file_ext VARCHAR(10) NOT NULL,
+  upload_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  download_counter INTEGER NOT NULL DEFAULT 0,
+  is_private BOOLEAN NOT NULL,
+  delete_code VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE download_logs (
+  id UUID NOT NULL PRIMARY KEY,
+  file_id UUID NOT NULL REFERENCES files(id),
+  date TIMESTAMP NOT NULL
+);

@@ -1,14 +1,14 @@
-const dbConnection = require('../db/connection');
+const { query } = require('../db');
 
 module.exports = function getFileEntry({ id, fileId }) {
   return new Promise((resolve, reject) => {
     const by = id ? 'id' : 'file_id';
-    const sql = `SELECT * FROM \`files\` WHERE ${by} = ?`;
+    const sql = `SELECT * FROM files WHERE ${by} = $1;`;
 
-    dbConnection.query(sql, [id || fileId], (err, result) => {
+    query(sql, [id || fileId], (err, result) => {
       if (err) reject(err);
 
-      resolve(result[0] || {});
+      resolve(result.rows[0] || {});
     });
   });
 };
