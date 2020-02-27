@@ -5,6 +5,7 @@ module.exports = function getLastAddedFiles({ limit = 5 } = {}) {
     const sql = `
       SELECT id, file_name
       FROM files
+      WHERE is_private = false
       ORDER BY upload_date DESC
       LIMIT $1;
     `;
