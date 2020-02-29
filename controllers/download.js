@@ -26,6 +26,7 @@ router.get('/download/:id', [getLastAddedFiles, getTopDownloads], async (req, re
     const fileSize = await getFileSize(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${fileExt}`);
   
     res.render('download', {
+      subtitle: 'pobierz plik',
       id,
       fileName,
       fileSize,

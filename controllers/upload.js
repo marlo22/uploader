@@ -36,6 +36,7 @@ router.get('/upload/:fileId', [getLastAddedFiles, getTopDownloads], async (req, 
   
   
     res.render('uploadSummary', {
+      subtitle: 'plik został dodany',
       deleteCode,
       fileName,
       isPrivate,

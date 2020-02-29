@@ -1,12 +1,12 @@
 html
   include includes/head
-    title Uploader - pobierz plik
+    title Uploader - #{subtitle}
   body
     include includes/header
     div.container
       div.row.mt-3
         div.col-8
-          span.h1 pobierz plik
+          span.h1 #{subtitle}
           ul.list-group.my-3
             li.list-group-item Nazwa: #{fileName}
             li.list-group-item Rozmiar: #{fileSize} MB

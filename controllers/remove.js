@@ -6,7 +6,7 @@ const deleteFile = require('../services/deleteFile');
 const router = express.Router();
 
 router.get('/remove', [getLastAddedFiles, getTopDownloads], (req, res) => {
-  res.render('remove');
+  res.render('remove', { subtitle: 'usuń plik' });
 });
 
 router.post('/remove', [getLastAddedFiles, getTopDownloads], async (req, res) => {

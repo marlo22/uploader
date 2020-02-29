@@ -1,12 +1,12 @@
 html
   include includes/head
-    title Uploader - plik został dodany
+    title Uploader - #{subtitle}
   body
     include includes/header
     div.container
       div.row.mt-3
         div.col-8
-          span.h1 udało się!
+          span.h1 #{subtitle}
           p.alert.alert-success.mt-2 Plik <strong>#{fileName}</strong> został pomyślnie zapisany na naszym serwerze jako zasób <strong>#{isPrivate === 0 ? 'publiczny' : 'prywatny'}</strong>.
             if isPrivate === 0
               span= " Oznacza to, że będzie on widoczny w katalogu zasobów i każda osoba będzie mogła uzyskać do niego dostęp."
