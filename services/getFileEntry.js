@@ -8,7 +8,7 @@ module.exports = function getFileEntry({ id, fileId }) {
     query(sql, [id || fileId], (err, result) => {
       if (err) reject(err);
 
-      resolve(result.rows[0] || {});
+      resolve(result && result.rows[0]);
     });
   });
 };

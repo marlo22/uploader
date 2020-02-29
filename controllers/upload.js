@@ -23,7 +23,7 @@ router.get('/upload/:fileId', [getLastAddedFiles, getTopDownloads], async (req, 
   try {
     const { fileId } = req.params;
     const fileEntry = await getFileEntry({ fileId });
-  
+
     if (!fileEntry) return res.sendStatus(404);
   
     const {
