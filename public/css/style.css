@@ -1,3 +1,9 @@
 .custom-file-label:after {
   content: 'Przeglądaj'
 }
+
+.list-group-item .text-body {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

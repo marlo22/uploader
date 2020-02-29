@@ -8,7 +8,7 @@ mixin lastAddedFilesList(data = [])
       ul.list-group.list-group-flush
         each file in data
           li.list-group-item.d-flex.justify-content-between.align-items-center
-            a.text-body(href=`/download/${file.id}`) #{file.file_name}
+            a.text-body(href=`/download/${file.id}` data-toggle="tooltip" data-placement="top" title=file.file_name) #{file.file_name}
 
 mixin topDownloadsList(data = [])
   div.card.mt-3
@@ -20,7 +20,7 @@ mixin topDownloadsList(data = [])
       ul.list-group.list-group-flush
         each file in data
           li.list-group-item.d-flex.justify-content-between.align-items-center
-            a.text-body(href=`/download/${file.id}`) #{file.file_name}
+            a.text-body(href=`/download/${file.id}` data-toggle="tooltip" data-placement="top" title=file.file_name) #{file.file_name}
             span.badge.badge-info.badge-pill #{file.download_counter}
 
 div.row
