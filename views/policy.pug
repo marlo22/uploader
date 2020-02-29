@@ -1,0 +1,15 @@
+html
+  include includes/head
+    title Uploader - #{subtitle}
+  body
+    include includes/header
+    div.container
+      div.row.mt-3
+        div.col-8
+          span.h1 #{subtitle}
+          hr
+          include ../policy.html
+          include includes/scripts
+        div.col-4
+          include includes/sidebar
+      include includes/footer
