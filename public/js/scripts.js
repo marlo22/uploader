@@ -110,6 +110,16 @@ var _uploaderDOMFunctions = (function () {
     }
   }
 
+  function handleSearchInputChange() {
+    var searchButton = document.getElementById('searchButton');
+
+    if (this.value) {
+      searchButton.disabled = false
+    } else {
+      searchButton.disabled = true;
+    }
+  }
+
   var listeners = [{
     element: document.getElementById('ownConfirm'),
     event: 'change',
@@ -126,6 +136,10 @@ var _uploaderDOMFunctions = (function () {
     element: document.getElementById('deleteCode'),
     event: 'keyup',
     handler: handleDeleteCodeInputsChange
+  }, {
+    element: document.getElementById('searchInput'),
+    event: 'keyup',
+    handler: handleSearchInputChange
   }];
   listeners.forEach(function (_ref) {
     var element = _ref.element,

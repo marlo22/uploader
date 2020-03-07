@@ -1,0 +1,38 @@
+html
+  include includes/head
+    title Uploader - #{subtitle}
+  body
+    include includes/header
+    div.container
+      div.row.mt-3
+        div.col-8
+          if !keyword
+            div.alert.alert-danger(role="alert")
+              span.font-weight-bold Wystąpił błąd! 
+              span W zapytaniu przekazano nieprawidłowe parametry.
+          else
+            span.h1 #{subtitle} - #{keyword}
+            hr
+            ul
+              each file in results
+                li
+                  a(href="/download/" + file.id) #{file.file_name}
+            if totalPages > 1
+              div.row
+                ul.pagination.mx-auto
+                  each _, index in Array(totalPages)
+                    - var pageNumber = index + 1;
+                    - var pageOffset = index * limit;
+                    - var currentPage = (offset / limit) + 1;
+                    if pageNumber === currentPage
+                      li.page-item.active
+                        a.page-link(href=nextPageUrl + pageOffset) #{pageNumber}
+                    else
+                      li.page-item
+                        a.page-link(href=nextPageUrl + pageOffset) #{pageNumber}
+            else
+              span Brak wyników.
+          include includes/scripts
+        div.col-4
+          include includes/sidebar
+      include includes/footer

@@ -1,0 +1,5 @@
+form.form-inline.my-2.my-lg-0(action="/search?" method="get")
+  input.form-control.mr-sm-2#searchInput(type="search" name="keyword" placeholder="Znajdź plik...")
+  input(type="hidden" name="offset" value="0")
+  input(type="hidden" name="limit" value="5")
+  button.btn.btn-light.my-2.my-sm-0#searchButton(disabled) Szukaj

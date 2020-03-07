@@ -12,6 +12,7 @@ const uploadRouter = require('./controllers/upload');
 const downloadRouter = require('./controllers/download');
 const removeRouter = require('./controllers/remove');
 const policyRouter = require('./controllers/policy');
+const searchRouter = require('./controllers/search');
 
 const { PORT } = process.env;
 
@@ -31,6 +32,7 @@ app.use(uploadRouter);
 app.use(downloadRouter);
 app.use(removeRouter);
 app.use(policyRouter);
+app.use(searchRouter);
 
 app.use('/bootstrap', express.static(`${__dirname}/node_modules/bootstrap/dist`));
 app.use('/js', express.static(`${__dirname}/public/js`));
