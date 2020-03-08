@@ -10,16 +10,18 @@ html
             div.alert.alert-danger(role="alert")
               span.font-weight-bold Wystąpił błąd! 
               span W zapytaniu przekazano nieprawidłowe parametry.
+          else if !results.length
+            span Brak wyników.
           else
             span.h1 #{subtitle} - #{keyword}
             hr
-            ul
+            ul.list-group
               each file in results
-                li
-                  a(href="/download/" + file.id) #{file.file_name}
+                li.list-group-item.border-0.p-0.py-1
+                  a.text-body(href="/download/" + file.id) #{file.file_name} #{file.file_size}
             if totalPages > 1
               div.row
-                ul.pagination.mx-auto
+                ul.pagination.mx-auto.mt-3
                   each _, index in Array(totalPages)
                     - var pageNumber = index + 1;
                     - var pageOffset = index * limit;
@@ -30,8 +32,6 @@ html
                     else
                       li.page-item
                         a.page-link(href=nextPageUrl + pageOffset) #{pageNumber}
-            else
-              span Brak wyników.
           include includes/scripts
         div.col-4
           include includes/sidebar
