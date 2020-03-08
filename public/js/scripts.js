@@ -114,7 +114,7 @@ var _uploaderDOMFunctions = (function () {
     var searchButton = document.getElementById('searchButton');
 
     if (this.value) {
-      searchButton.disabled = false
+      searchButton.disabled = false;
     } else {
       searchButton.disabled = true;
     }

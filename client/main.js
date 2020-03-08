@@ -18,6 +18,11 @@ const listeners = [
     element: document.getElementById('deleteCode'),
     event: 'keyup',
     handler: require('./handleDeleteCodeInputsChange')
+  },
+  {
+    element: document.getElementById('searchInput'),
+    event: 'keyup',
+    handler: require('./handleSearchInputChange')
   }
 ];
 
