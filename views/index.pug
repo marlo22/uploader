@@ -1,6 +1,5 @@
 html
   include includes/head
-    title Uploader - #{subtitle}
   body
     include includes/header
     div.container
@@ -8,20 +7,20 @@ html
         div.col-8
           h1 #{subtitle}
           hr
-          p= "Wskaż plik, który chcesz zapisać na naszym serwerze."
+          p #{locales.addFile.chooseFile}
           form(action="/upload" method="POST" enctype="multipart/form-data")
             div.input-group
               div.custom-file
                 input.custom-file-input#uploaderInput(type="file" name="file")
                 label.custom-file-label#uploaderLabel(for="uploaderInput")
-            small.text-muted Maksymalny rozmiar pliku to #{maxFileSize / 1000} MB. Dopuszczalne formaty to: #{allowedFileFormats}.
+            small.text-muted #{locales.addFile.maxFileSize} #{maxFileSize / 1000} MB. #{locales.addFile.allowedFormats} #{allowedFileFormats}.
             div.form-check.mt-2
               input.form-check-input#private(type="checkbox" name="isPrivate")
-              label.form-check-label(for="private") Plik prywatny
+              label.form-check-label(for="private") #{locales.addFile.privateFile}
             div.form-check
               input.form-check-input#ownConfirm(type="checkbox")
-              label.form-check-label(for="ownConfirm") Potwierdzam, że posiadam prawa autorskie do tego pliku
-            button.btn.btn-info.mt-2#submitFileBtn(type="submit" disabled) Wyślij plik
+              label.form-check-label(for="ownConfirm") #{locales.addFile.confirmRights}
+            button.btn.btn-info.mt-2#submitFileBtn(type="submit" disabled) #{locales.addFile.sendFile}
           div#messageContainer
           include includes/scripts
         div.col-4

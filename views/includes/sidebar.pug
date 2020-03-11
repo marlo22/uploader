@@ -1,9 +1,9 @@
 mixin lastAddedFilesList(data = [])
   div.card
     div.card-header
-      span Ostatnio dodane
+      span #{locales.sidebar.lastAddedFiles}
     if !data.length
-      span.py-3.px-3 Brak ostatnio dodanych plików.
+      span.py-3.px-3 #{locales.sidebar.noRecentAddedFiles}
     else
       ul.list-group.list-group-flush
         each file in data
@@ -13,9 +13,9 @@ mixin lastAddedFilesList(data = [])
 mixin topDownloadsList(data = [])
   div.card.mt-3
     div.card-header
-      span Najchętniej pobierane
+      span #{locales.sidebar.topDownloads}
     if !data.length
-      span.py-3.px-3 Brak ostatnio pobranych plików.
+      span.py-3.px-3 #{locales.sidebar.noRecentDownloadedFiles}
     else
       ul.list-group.list-group-flush
         each file in data

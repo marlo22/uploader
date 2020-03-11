@@ -1,28 +1,27 @@
 html
   include includes/head
-    title Uploader - #{subtitle}
   body
     include includes/header
     div.container
       div.row.mt-3
         div.col-8
           span.h1 #{subtitle}
-          p.alert.alert-success.mt-2 Plik <strong>#{fileName}</strong> został pomyślnie zapisany na naszym serwerze jako zasób <strong>#{isPrivate === 0 ? 'publiczny' : 'prywatny'}</strong>.
+          p.alert.alert-success.mt-2 #{locales.uploadSummary.file} <strong>#{fileName}</strong> #{locales.uploadSummary.fileSaved} <strong>#{isPrivate === 0 ? locales.uploadSummary.publicFile : locales.uploadSummary.privateFile}</strong>.
             if isPrivate === 0
-              span= " Oznacza to, że będzie on widoczny w katalogu zasobów i każda osoba będzie mogła uzyskać do niego dostęp."
+              span= locales.uploadSummary.publicDescription
             else
-              span= " Oznacza to, że nie będzie on widoczny w katalogu zasobów i dostęp do niego będzie mogła uzyskać tylko i wyłącznie osoba, która posiada unikalny link."
+              span= locales.uploadSummary.privateDescription
           div.form-group.mt-3
             label(for="fileShareUrl")
-              span Link do pobrania pliku:
+              span #{locales.uploadSummary.link}
               br
-              small.text-muted Każda osoba, która posiada ten link, będzie mogła pobrać plik,
+              small.text-muted #{locales.uploadSummary.linkDescription}
             input.form-control#fileShareUrl(value=fileDownloadUrl)
           div.form-group
             label(for="fileDeleteCode")
-              span Kod do usunięcia pliku z serwera:
+              span #{locales.uploadSummary.accessCode}
               br
-              small.text-muted Zapamiętaj ten kod, jeśli w przyszłości chciałbyś usunąć plik z naszych serwerów.
+              small.text-muted #{locales.uploadSummary.accessCodeDescription}
             input.form-control#fileDeleteCode(value=deleteCode)
           div#messageContainer
           include includes/scripts

@@ -5,10 +5,12 @@ const getFileEntry = require('../services/getFileEntry');
 const increaseDownloadCounter = require('../services/increaseDownloadCounter');
 const { formatDate } = require('../helpers/formatDate');
 const getFileSize = require('../helpers/getFileSize');
+const getLocales = require('../middlewares/getLocales');
+const getSubtitleFromLocale = require('../helpers/getSubtitleFromLocale');
 
 const router = express.Router();
 
-router.get('/download/:id', [getLastAddedFiles, getTopDownloads], async (req, res) => {
+router.get('/download/:id', [getLastAddedFiles, getTopDownloads, getLocales], async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -26,7 +28,7 @@ router.get('/download/:id', [getLastAddedFiles, getTopDownloads], async (req, re
     const fileSize = await getFileSize(`${process.env.UPLOAD_DIRECTORY}/${fileId}.${fileExt}`);
   
     res.render('download', {
-      subtitle: 'pobierz plik',
+      subtitle: getSubtitleFromLocale('downloadFile'),
       id,
       fileName,
       fileSize,

@@ -1,17 +1,13 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-info
-  a.navbar-brand(href="/") Uploader
+  a.navbar-brand(href="/") #{appName}
   div.collapse.navbar-collapse#navbar
     ul.navbar-nav
-      if path === '/'
-        li.nav-item.active
-          a.nav-link(href="/") Dodaj plik
-      else
-        li.nav-item
-          a.nav-link(href="/") Dodaj plik
       li.nav-item
-        a.nav-link(href="/remove") Usuń plik
+        a.nav-link(href="/") #{locales.header.addFile}
       li.nav-item
-        a.nav-link(href="/policy") Regulamin
+        a.nav-link(href="/remove") #{locales.header.removeFile}
+      li.nav-item
+        a.nav-link(href="/policy") #{locales.header.policy}
   include ./searchInput
     button.navbar-toggler.ml-2(type="submit" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Pokaż/ukryj menu")
-      span Menu
+      span #{locales.header.menu}

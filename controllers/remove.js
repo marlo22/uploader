@@ -2,14 +2,16 @@ const express = require('express');
 const getLastAddedFiles = require('../middlewares/getLastAddedFiles');
 const getTopDownloads = require('../middlewares/getTopDownloads'); 
 const deleteFile = require('../services/deleteFile');
+const getLocales = require('../middlewares/getLocales');
+const getSubtitleFromLocale = require('../helpers/getSubtitleFromLocale');
 
 const router = express.Router();
 
-router.get('/remove', [getLastAddedFiles, getTopDownloads], (req, res) => {
-  res.render('remove', { subtitle: 'usuń plik' });
+router.get('/remove', [getLastAddedFiles, getTopDownloads, getLocales], (req, res) => {
+  res.render('remove', { subtitle: getSubtitleFromLocale('removeFile') });
 });
 
-router.post('/remove', [getLastAddedFiles, getTopDownloads], async (req, res) => {
+router.post('/remove', [getLastAddedFiles, getTopDownloads, getLocales], async (req, res) => {
   const { id, deleteCode } = req.body;
 
   try {

@@ -21,6 +21,9 @@ app.locals.env = {
   FILE_ALLOWED_FORMATS: process.env.FILE_ALLOWED_FORMATS
 };
 
+const translations = require(`./translations/${process.env.LANGUAGE}`);
+app.locals.translations = translations.client;
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(helmet());

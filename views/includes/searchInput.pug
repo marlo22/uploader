@@ -1,5 +1,5 @@
 form.form-inline.my-2.my-lg-0(action="/search?" method="get")
-  input.form-control.mr-sm-2#searchInput(type="search" name="keyword" placeholder="Znajdź plik...")
+  input.form-control.mr-sm-2#searchInput(type="search" name="keyword" placeholder=locales.search.inputPlaceholder)
   input(type="hidden" name="offset" value="0")
   input(type="hidden" name="limit" value="10")
-  button.btn.btn-light.my-2.my-sm-0#searchButton(disabled) Szukaj
+  button.btn.btn-light.my-2.my-sm-0#searchButton(disabled) #{locales.search.searchText}

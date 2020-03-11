@@ -1,6 +1,5 @@
 html
   include includes/head
-    title Uploader - #{subtitle}
   body
     include includes/header
     div.container
@@ -9,23 +8,23 @@ html
           span.h1 #{subtitle}
           hr
           if status === 'success'
-            p.alert.alert-success.mt-2 Plik został usunięty.
+            p.alert.alert-success.mt-2 #{locales.removeFile.deleteSuccess}
           else if status === 'failed'
-            p.alert.alert-danger.mt-2 Wystąpił błąd podczas usuwania pliku.
+            p.alert.alert-danger.mt-2 #{locales.removeFile.removeFile}
           form(action="/remove" method="POST")
             div.form-group.mt-3
               label(for="fileUrl")
-                span ID usuwanego pliku:
+                span #{locales.removeFile.idOfFileToDelete}
                 br
-                small.text-muted Podaj ID usuwanego pliku.
+                small.text-muted #{locales.removeFile.idOfFileToDeleteDescription}
               input.form-control#fileUrl(name="id")
             div.form-group.mt-3
               label(for="deleteCode")
-                span Kod dostępu:
+                span #{locales.removeFile.accessCode}
                 br
-                small.text-muted Podaj unikatowy kod, który został wygenerowany podczas dodawania pliku.
+                small.text-muted #{locales.removeFile.accessCodeDescription}
               input.form-control#deleteCode(name="deleteCode")
-            button.btn.btn-info.mt-1#deleteFileBtn(type="submit" disabled)= "Usuń"
+            button.btn.btn-info.mt-1#deleteFileBtn(type="submit" disabled)= locales.removeFile.deleteText
           include includes/scripts
         div.col-4
           include includes/sidebar

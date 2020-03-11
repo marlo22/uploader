@@ -66,18 +66,21 @@ var _uploaderDOMFunctions = (function () {
     var allowedTypes = window.__FILE_ALLOWED_FORMATS__.split(',');
 
     if (!allowedTypes.includes(mimeType)) {
-      printMessage("Niedozwolony typ ".concat(mimeType, "."));
+      var _window = window,
+          __TRANSLATIONS__ = _window.__TRANSLATIONS__;
+      printMessage("".concat(__TRANSLATIONS__.notAllowedExtension, " ").concat(mimeType));
     }
   }
 
   function validFileSize(fileSize) {
     var _window = window,
-        __FILE_MAX_SIZE__ = _window.__FILE_MAX_SIZE__;
+        __FILE_MAX_SIZE__ = _window.__FILE_MAX_SIZE__,
+        __TRANSLATIONS__ = _window.__TRANSLATIONS__;
     var fileSizeInKb = fileSize / 1000;
 
     if (__FILE_MAX_SIZE__ < fileSizeInKb) {
       var maxFileSizeInMb = __FILE_MAX_SIZE__ / 1000;
-      printMessage("Wczytany plik jest zbyt du\u017Cy. Maksymalny rozmiar to ".concat(maxFileSizeInMb, " MB"));
+      printMessage("".concat(__TRANSLATIONS__.tooLargeFile, " ").concat(maxFileSizeInMb, " MB"));
     }
   }
 

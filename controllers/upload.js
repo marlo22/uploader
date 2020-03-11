@@ -4,6 +4,8 @@ const getLastAddedFiles = require('../middlewares/getLastAddedFiles');
 const getTopDownloads = require('../middlewares/getTopDownloads');
 const getFileEntry = require('../services/getFileEntry');
 const getHostUrl = require('../helpers/getHostUrl');
+const getLocales = require('../middlewares/getLocales');
+const getSubtitleFromLocale = require('../helpers/getSubtitleFromLocale');
 
 const router = express.Router();
 
@@ -19,7 +21,7 @@ router.post('/upload', (req, res) => {
   });
 });
 
-router.get('/upload/:fileId', [getLastAddedFiles, getTopDownloads], async (req, res) => {
+router.get('/upload/:fileId', [getLastAddedFiles, getTopDownloads, getLocales], async (req, res) => {
   try {
     const { fileId } = req.params;
     const fileEntry = await getFileEntry({ fileId });
@@ -36,7 +38,7 @@ router.get('/upload/:fileId', [getLastAddedFiles, getTopDownloads], async (req, 
   
   
     res.render('uploadSummary', {
-      subtitle: 'plik został dodany',
+      subtitle: getSubtitleFromLocale('uploadSummary'),
       deleteCode,
       fileName,
       isPrivate,

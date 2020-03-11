@@ -1,6 +1,5 @@
 html
   include includes/head
-    title Uploader - #{subtitle}
   body
     include includes/header
     div.container
@@ -8,11 +7,11 @@ html
         div.col-8
           span.h1 #{subtitle}
           ul.list-group.my-3
-            li.list-group-item Nazwa: #{fileName}
-            li.list-group-item Rozmiar: #{fileSize} MB
-            li.list-group-item Data dodania: #{uploadDate}
-            li.list-group-item Liczba pobrań: #{downloadCounter}
-          a.btn.btn-info(href=`/download/${id}/get`)= "Pobierz"
+            li.list-group-item #{locales.downloadFile.name} #{fileName}
+            li.list-group-item #{locales.downloadFile.size} #{fileSize} MB
+            li.list-group-item #{locales.downloadFile.uploadDate} #{uploadDate}
+            li.list-group-item #{locales.downloadFile.downloadCounter} #{downloadCounter}
+          a.btn.btn-info(href=`/download/${id}/get`)= locales.downloadFile.downloadText
           include includes/scripts
         div.col-4
           include includes/sidebar

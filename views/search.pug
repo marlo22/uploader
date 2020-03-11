@@ -1,6 +1,5 @@
 html
   include includes/head
-    title Uploader - #{subtitle}
   body
     include includes/header
     div.container
@@ -8,10 +7,10 @@ html
         div.col-8
           if !keyword
             div.alert.alert-danger(role="alert")
-              span.font-weight-bold Wystąpił błąd! 
-              span W zapytaniu przekazano nieprawidłowe parametry.
+              span.font-weight-bold #{locales.find.errorOccured}
+              span #{locales.find.paramsError}
           else if !results.length
-            span Brak wyników.
+            span #{locales.find.noResults}
           else
             span.h1 #{subtitle} - #{keyword}
             hr
