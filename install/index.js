@@ -8,6 +8,19 @@ async function loadSql() {
   return sql.toString();
 }
 
+async function checkInstallation() {
+  return new Promise(resolve => {
+    query('SELECT * FROM files', err => {
+      if (err) resolve(false);
+
+      query('SELECT * FROM download_logs', err => {
+        if (err) resolve(false);
+        resolve(true);
+      });
+    });
+  });
+};
+
 async function initDb() {
   const sql = await loadSql();
 
@@ -19,4 +32,12 @@ async function initDb() {
   });
 };
 
-initDb();
+checkInstallation()
+  .then(isInitialized => {
+    if (isInitialized) {
+      console.log('Application is already initialized.');
+      process.exit();
+    }
+
+    initDb();
+  });

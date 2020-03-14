@@ -1,10 +1,9 @@
 FROM node:latest
 
-ADD . /app
-WORKDIR /app
+WORKDIR /usr/src/app
+
+COPY package.json yarn.lock ./
 
 RUN yarn install
 
-RUN yarn start
-
-EXPOSE 3000
+COPY . .
